@@ -16,3 +16,8 @@ RETURN c.name, type(r), target.name
 ###Check if it's a local admin to high-value targets
 MATCH (c:Computer {name: "COMPROMISED_COMPUTER.DOMAIN.COM"})-[r:AdminTo]->(target:Computer)
 RETURN c.name, target.name
+
+#Group to Admin
+MATCH (g:Group {name: "GROUPNAME@DOMAIN.COM"}), (m:Group {name: "DOMAIN ADMINS@DOMAIN.COM"})
+MATCH p = shortestPath((g)-[:MemberOf|AddMember|GenericAll|WriteDacl|ForceChangePassword*1..]->(m))
+RETURN p
