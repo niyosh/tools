@@ -1,0 +1,9 @@
+###Paths to Domain Admins from You
+MATCH (n:User {name: 'YOU@DOMAIN.COM'}), (m:Group {name: 'DOMAIN ADMINS@DOMAIN.COM'})
+MATCH p = shortestPath((n)-[:MemberOf|HasSession|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner*1..]->(m))
+RETURN p
+
+###Shortest Path from Any User to Domain Admins
+MATCH (n:User), (m:Group {name: 'DOMAIN ADMINS@DOMAIN.COM'})
+MATCH p = shortestPath((n)-[:MemberOf|HasSession|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner*1..]->(m))
+RETURN p LIMIT 25
