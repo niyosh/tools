@@ -1,3 +1,8 @@
 Get-ChildItem C:\ -Recurse -File -Include *.ps1,*.txt -ErrorAction SilentlyContinue |
 Select-String -Pattern "password|passwd|pwd|pass=" |
 Select Path, LineNumber, Line
+
+
+Get-ChildItem C:\ -Recurse -File -Include *.ps1,*.txt -ErrorAction SilentlyContinue |
+Select-String -Pattern "password|passwd" |
+Out-File C:\Temp\ps1_txt_passwords.txt
